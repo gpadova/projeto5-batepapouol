@@ -1,0 +1,99 @@
+body{
+    font-family: "Roboto";
+    background-color: #e5e5e5;
+}
+
+nav{
+    width: 100%;
+    height: 80px;
+    display: flex;
+    justify-content: space-between;
+    box-shadow: 0px 4px 6px 0px #0000000D;
+    align-items: center;
+    background-color: white;
+}
+
+#uol-logo{
+    width: 75px;
+    height: 53px;
+    
+    margin-left: 22px;
+}
+
+#two-person{
+    height: 31px;
+    width: 42px;
+    
+    margin-right: 22px;
+}
+.small-rectangle{
+    width: 100%;
+    height: 26px;
+    background-color: #e5e5e5;
+}
+
+main{
+    width: 100%;
+    height: 441px;
+    background-color:#e5e5e5;
+    
+}
+
+.entry-or-leave-room, .private-messages, .general-messages{
+    width: 100%;
+    min-height: 40px;
+    height: auto;
+    display: flex;
+    margin: 0 auto;
+    align-items: center;
+    font-size: 14px;
+    font-weight: 400;
+    margin-bottom: 2px;
+    border-radius: 2px;
+}
+
+.entry-or-leave-room span, .private-messages span, .general-messages span{
+    font-weight: 700;
+}
+
+.hour{
+    color: grey;
+    margin-right: 5px;
+}
+.entry-or-leave-room{
+    background: #DCDCDC;
+
+}
+.general-messages{
+    background: #FFFFFF;
+
+}
+
+.private-messages{
+    background: #FFDEDE;
+}
+footer{
+    width: 100%;
+    height: 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    box-shadow: 0px -4px 6px 0px #0000000D;
+    background-color: white
+}
+
+footer input{
+    width: 145px;
+    height: 30px;
+    margin-left: 18px;
+    border: 1px solid white;
+    color: black;
+}
+
+footer img{
+    width: 26px;
+    height: 26px;
+
+    margin-right: 18px;
+}
