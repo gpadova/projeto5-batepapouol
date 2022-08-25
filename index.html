@@ -15,7 +15,9 @@
     <img src="./images/uolLogo.png" alt="Logo da UOL" id="uol-logo">
     <img src="./images/twoPerson.png" alt="Menu de usuários" id="two-person">
 </nav>
+
 <div class="small-rectangle"></div>
+
 <main>
     <div class="entry-or-leave-room">
         <div class="hour">(00:00:00)</div>
@@ -29,11 +31,14 @@
         <div class="hour">(00:00:00)</div>
         <div class="message"><span>User</span> para <span>User2</span>: message</div>
     </div>
-
-<script src="script.js"></script> 
 </main>
+
 <footer>
-   <input type="" placeholder="Escreva aqui...">
-   <img src="./images/littlePlane.png" alt=""> 
+   <input type="text" placeholder="Escreva aqui...">
+   <img src="./images/littlePlane.png" alt="" onclick="sendMessages()"> 
 </footer>
+
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="script.js"></script> 
+
 </html>
