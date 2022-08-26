@@ -44,19 +44,19 @@ function computeInScreen(answer){
     
     for(let i = 0; i < answer.data.length; i++){
         const mainPart = document.querySelector('main')
-        if(answer.data.type === "status"){
+        if(answer.data[i].type === "status"){
             mainPart.innerHTML += `    
             <div class="entry-or-leave-room">
                 <div class="hour">(${answer.data[i].time})</div>
                 <div class="message"><span>${answer.data[i].from}</span> entra na sala...</div>
             </div>`
-        }else if(answer.data[i].type === "message"){
+        }if(answer.data[i].type === "message"){
             mainPart.innerHTML += `    
             <div class="general-messages">
                 <div class="hour">(${answer.data[i].time})</div>
                 <div class="message"><span>${answer.data[i].from}</span>  reservadamente para <span>${answer.data[i].to}</span>: ${answer.data[i].text}</div>
             </div>`
-        }else if(answer.data[i].type=== "private_message"){
+        }if(answer.data[i].type=== "private_message"){
             mainPart.innerHTML += `
             <div class="private-messages">
                 <div class="hour">(${answer.data[i].time})</div>
@@ -76,10 +76,9 @@ function sendMessages(){
         text: typedText,
         type: "message"
     })
-    typedText.then(cleaningInputButton)
+    sentMessage.then(cleaningInputButton)
 }
 
 function cleaningInputButton(){
-    const typedText = document.querySelector('input').value
-    typedText = ""
+    document.querySelector('input').value = ""
 }
