@@ -1,6 +1,7 @@
 body{
     font-family: "Roboto";
     background-color: #e5e5e5;
+    height: 667px;
 }
 
 nav{
@@ -34,7 +35,7 @@ nav{
 
 main{
     width: 100%;
-    height: 441px;
+    max-height: 441px;
     background-color:#e5e5e5;
     
 }
@@ -50,6 +51,7 @@ main{
     font-weight: 400;
     margin-bottom: 2px;
     border-radius: 2px;
+    word-break: break-all;
 }
 
 .entry-or-leave-room span, .private-messages span, .general-messages span{

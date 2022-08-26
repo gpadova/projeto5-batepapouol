@@ -1,7 +1,6 @@
 let nameOfTheUser = prompt("Qual o seu nome?")
 
 function sendName(){
-    
     const promessa = axios.post("https://mock-api.driven.com.br/api/v6/uol/participants", {
         name: nameOfTheUser
       })
@@ -15,7 +14,7 @@ function enterTheRoom(){
     let current = new Date()
     mainPart.innerHTML += `    
     <div class="entry-or-leave-room">
-        <div class="hour">(${current.getHours() }:${current.getMinutes()}:${current.getSeconds()})</div>
+        <div class="hour">(${current.getHours()}:${current.getMinutes()}:${current.getSeconds()})</div>
         <div class="message"><span>${nameOfTheUser}</span> entra na sala...</div>
     </div>`
 }
@@ -41,28 +40,27 @@ function receiveMessages(){
 }
 
 
-
 function computeInScreen(answer){
-    for(let i = 0; i < answer.data.length ; i++){
-        const typeOfMessage = answer[i].data.type
+    
+    for(let i = 0; i < answer.data.length; i++){
         const mainPart = document.querySelector('main')
-        if(typeOfMessage === "status"){
+        if(answer.data.type === "status"){
             mainPart.innerHTML += `    
             <div class="entry-or-leave-room">
-                <div class="hour">(${answer.data.time})</div>
-                <div class="message"><span>${answer.data.from}</span> entra na sala...</div>
+                <div class="hour">(${answer.data[i].time})</div>
+                <div class="message"><span>${answer.data[i].from}</span> entra na sala...</div>
             </div>`
-        }else if(typeOfMessage === "message"){
+        }else if(answer.data[i].type === "message"){
             mainPart.innerHTML += `    
             <div class="general-messages">
-                <div class="hour">(${answer.data.time})</div>
-                <div class="message"><span>${answer.data.from}</span>  reservadamente para <span>${answer.data.to}</span>: ${answer.data.text}</div>
+                <div class="hour">(${answer.data[i].time})</div>
+                <div class="message"><span>${answer.data[i].from}</span>  reservadamente para <span>${answer.data[i].to}</span>: ${answer.data[i].text}</div>
             </div>`
-        }else if(typeOfMessage=== "private_message"){
+        }else if(answer.data[i].type=== "private_message"){
             mainPart.innerHTML += `
             <div class="private-messages">
-                <div class="hour">(${answer.data.time})</div>
-                <div class="message"><span>${answer.data.from}</span> para <span>${answer.data.to}</span>: ${answer.data.text}</div>
+                <div class="hour">(${answer.data[i].time})</div>
+                <div class="message"><span>${answer.data[i].from}</span> para <span>${answer.data[i].to}</span>: ${answer.data[i].text}</div>
             </div>`
         }
     }
