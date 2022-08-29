@@ -54,7 +54,6 @@ function receiveMessages(){
 
 function computeInScreen(answer){
     const mainPart = document.querySelector('main')
-    if(mainPart !== ""){lastMessage = mainPart.lastChild}
     mainPart.innerHTML = ""
 
     for(let i = 0; i < answer.data.length; i++){
