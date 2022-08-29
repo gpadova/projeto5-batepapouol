@@ -1,13 +1,22 @@
-let nameOfTheUser = prompt("Qual o seu nome?")
+let sentMessageObejct
+let nameOfTheUser
+let nameAfterError
+let postObject
+let lastMessage
+
+function askingTheName(){
+    nameOfTheUser = prompt("Qual o seu nome?")
+    sendName()
+}
+
+askingTheName()
 
 function sendName(){
-    const promessa = axios.post("https://mock-api.driven.com.br/api/v6/uol/participants", {
-        name: nameOfTheUser
-      })
+    const promessa = axios.post("https://mock-api.driven.com.br/api/v6/uol/participants", {name: nameOfTheUser})
     promessa.then(enterTheRoom)
     promessa.catch(checkError)
 }
-sendName()
+
 
 function enterTheRoom(){
     const mainPart = document.querySelector('main')
@@ -19,9 +28,11 @@ function enterTheRoom(){
     </div>`
 }
 
-function checkError(){
-    alert("Infelizmente já existe um usuário registrado com esse nome")
-    sendName()
+function checkError(error){
+    nameOfTheUser = prompt("Infelizmente o nome já está em uso, selecione outro" )
+    const promessa = axios.post("https://mock-api.driven.com.br/api/v6/uol/participants", {name: nameOfTheUser})
+    promessa.then(enterTheRoom)
+    promessa.catch(checkError)
 }
 
 setTimeout(checkStatus, 5000)
@@ -35,15 +46,19 @@ function checkStatus(){
 receiveMessages()
 
 function receiveMessages(){
-    const messsage = axios.get('https://mock-api.driven.com.br/api/v6/uol/messages')
-    messsage.then(computeInScreen)
+    const message = axios.get('https://mock-api.driven.com.br/api/v6/uol/messages')
+    message.then(computeInScreen)
+    message.catch(messageError)
 }
 
 
 function computeInScreen(answer){
-    
+    const mainPart = document.querySelector('main')
+    if(mainPart !== ""){lastMessage = mainPart.lastChild}
+    mainPart.innerHTML = ""
+
     for(let i = 0; i < answer.data.length; i++){
-        const mainPart = document.querySelector('main')
+        
         if(answer.data[i].type === "status"){
             mainPart.innerHTML += `    
             <div class="entry-or-leave-room">
@@ -64,21 +79,35 @@ function computeInScreen(answer){
             </div>`
         }
     }
+    mainPart.lastChild.scrollIntoView({
+        behavior: "smooth"
+    })
     setTimeout(receiveMessages, 3000)
 }
-
+function messageError() {
+    alert(`Algo deu errado`);
+    document.location.reload(true);
+}
 
 function sendMessages(){
+
     const typedText = document.querySelector('input').value
-    const sentMessage = axios.post('https://mock-api.driven.com.br/api/v6/uol/messages', {
+    sentMessageObject = {
         from: nameOfTheUser,
         to: "Todos",
         text: typedText,
         type: "message"
-    })
+    }
+    const sentMessage = axios.post('https://mock-api.driven.com.br/api/v6/uol/messages', sentMessageObject)
     sentMessage.then(cleaningInputButton)
+    sentMessage.catch(errorInSending)
 }
 
 function cleaningInputButton(){
     document.querySelector('input').value = ""
+}
+
+function errorInSending(error) {
+    alert(`Conexão interrompida com o servidor, iremos recarregar a página`);
+    window.location.reload();
 }
